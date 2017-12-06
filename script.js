@@ -1,4 +1,4 @@
-/*global $ APIKEY*/
+/*global $ APIKEY navigator*/
 $(document).ready(function() {
     //Variables
     var lat = "";
@@ -7,8 +7,9 @@ $(document).ready(function() {
 
     //Geoloaction to gather lat, long, city data
     function getLocation() {
-
+        console.log(navigator.Geolocation.getCurrentPosition(showPosition))
     }
+    getLocation()
 
 
     $.ajax({
