@@ -32,6 +32,11 @@ function getWeather(lat, lon) {
         },
         success: function(response) {
             console.log(response);
+            $('#city').html(response.name);
+            $('#country').html(response.sys.country);
+                        // $('#temp').html(response.weather[0].main);
+            // $('#type').html(response.weather[0].main);
+            // $('#icon').html(response.weather[0].main);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             alert(textStatus, errorThrown)
