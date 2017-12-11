@@ -5,7 +5,6 @@ An exploration into open API data utilized to build a working weather app with g
 ### Table of Contents
 
 - [Development](#development)
-- [Languages and Tools](#language and tools)
 
 ### Development
 
