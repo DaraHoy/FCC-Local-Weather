@@ -4,18 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Local Weather App</title>
+    <!--Google icon fonts-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- CDN for materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <title>Local Weather</title>
 </head>
 <body>
     <div id="lat"></div>
     <div id="long"></div>
     <div id="city"></div>
     <div id="country"></div>
-    <div id="temp"></div>
+    <div id="temp"></div><i class="material-icons">sun</i>
     <div id="type"></div>
+    <div id="icon"></div>
+    <select name="unitSelect" id="unitSelect">
+        <option value="imperial" selected="selected">Fahrenheit</option>
+        <option value="metric">Celsius</option>
+    </select>
 
 
+    <!-- CDN for jQuery + materialize.js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="key.js"></script>
     <script src="script.js"></script>
 </body>
