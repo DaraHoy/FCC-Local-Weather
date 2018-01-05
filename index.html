@@ -11,18 +11,26 @@
     <title>Local Weather</title>
 </head>
 <body>
-    <div id="lat"></div>
-    <div id="long"></div>
-    <div id="city"></div>
-    <div id="country"></div>
-    <div id="temp"></div><i class="material-icons">sun</i>
-    <div id="type"></div>
-    <div id="icon"></div>
-    <select name="unitSelect" id="unitSelect">
-        <option value="imperial" selected="selected">Fahrenheit</option>
-        <option value="metric">Celsius</option>
-    </select>
+    <div class="container">
+        <div class="row">
+            <!-- Current Temperature -->
+            <div class="col s12 flow-text center-align blue white-text">
+                <span id="temp"></span>
+            </div>
+        </div>
+    </div>
 
+<div id="lat"></div>
+<div id="long"></div>
+<div id="city"></div>
+<div id="country"></div>
+<div id="temp"></div><i class="material-icons">sun</i>
+<div id="type"></div>
+<div id="icon"></div>
+<select name="unitSelect" id="unitSelect">
+    <option value="imperial" selected="selected">Fahrenheit</option>
+    <option value="metric">Celsius</option>
+</select>
 
     <!-- CDN for jQuery + materialize.js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

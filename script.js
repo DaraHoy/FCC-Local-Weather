@@ -5,6 +5,7 @@ var lat, lon;
 var unit = $("#unitSelect").val();
 var x = navigator.geolocation;
 
+//
 $(document).ready(function() {
     if (navigator.geolocation) {
         x.getCurrentPosition(function(position) {
@@ -28,14 +29,14 @@ function getWeather(lat, lon, unit) {
         data: {
             lat: lat,
             lon: lon,
-            units: unit,
+            units: "imperial",
             apiKey: APIKEY
         },
         success: function(response) {
             console.log(response);
             $('#city').html(response.name);
             $('#country').html(response.sys.country);
-            $('#temp').html(response.main.temp);
+            $('#temp').html(Math.round(response.main.temp));
             $('#type').html(`${response.weather[0].main}`);
             // getIcon();
             // setTempColor();
