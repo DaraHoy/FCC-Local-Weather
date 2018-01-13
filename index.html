@@ -8,29 +8,16 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- CDN for materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="style.css" type="text/css" />
     <title>Local Weather</title>
 </head>
-<body>
+<body id='tempColor' class='light-blue'>
     <div class="container">
-        <div class="row">
-            <!-- Current Temperature -->
-            <div class="col s12 flow-text center-align blue white-text">
-                <span id="temp"></span>
-            </div>
-        </div>
-    </div>
+        <h4><span id='city' class='white-text'></span></h4>
+        <h1><span id='temp' class='white-text'></span></h1>
+        <h4><span id='unit' class='white-text'></span></h4>
+    </div><!-- main container ends -->
 
-<div id="lat"></div>
-<div id="long"></div>
-<div id="city"></div>
-<div id="country"></div>
-<div id="temp"></div><i class="material-icons">sun</i>
-<div id="type"></div>
-<div id="icon"></div>
-<select name="unitSelect" id="unitSelect">
-    <option value="imperial" selected="selected">Fahrenheit</option>
-    <option value="metric">Celsius</option>
-</select>
 
     <!-- CDN for jQuery + materialize.js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
