@@ -2,6 +2,8 @@
 
 //Variables
 var lat, lon;
+var zipCode = false; // zipCode causing bad request error
+var lastZip = '';
 var x = navigator.geolocation;
 
 // Get weather based on location
@@ -18,38 +20,21 @@ $(document).ready(function() {
     }
 })
 
-var unit = {
-    measure: 'imperial',
-    symbol: '&#8457',
-    change: function() {
-        if (this.measure === 'imperial') {
-            this.measure = 'metric';
-            this.symbol = '&#8451';
-        }
-        else {
-            this.measure = 'imperial';
-            this.symbol = '&#8457';
-        }
-        weather.geoLocation(lat, lon)
-    }
-}
-
 var weather = {
-    geoLocation: function(lat, lon) {
+    unitType: 'imperial',
+    unitSymbol: '&#8457',
+    geoLocation: function() {
         $.ajax({
             method: "GET",
             url: "https://api.openweathermap.org/data/2.5/weather",
             data: {
                 lat: lat,
                 lon: lon,
-                units: unit.measure,
+                units: weather.unitType,
                 apiKey: APIKEY
             },
             success: function(response) {
-                console.log(response);
-                $('#city').html(response.name);
-                $('#country').html(response.sys.country);
-                $('#temp').html(Math.round(response.main.temp) + `${unit.symbol}`);
+                $('#temp').html(Math.round(response.main.temp) + `${weather.unitSymbol} in ${response.name}`);
                 // getIcon();
                 // setTempColor();
             },
@@ -64,14 +49,14 @@ var weather = {
             url: "https://api.openweathermap.org/data/2.5/weather",
             data: {
                 zip: zip,
-                units: unit.measure,
+                units: weather.unitType,
                 apiKey: APIKEY
             },
             success: function(response) {
                 console.log(response);
-                $('#city').html(response.name);
-                $('#country').html(response.sys.country);
-                $('#temp').html(Math.round(response.main.temp));
+                zipCode = true;
+                lastZip = zip;
+                $('#temp').html(Math.round(response.main.temp) + `${weather.unitSymbol} in ${response.name}`);
                 // getIcon();
                 // setTempColor();
             },
@@ -79,6 +64,25 @@ var weather = {
                 alert(textStatus, errorThrown)
             }
         })
+    },
+    changeUnit: function() {
+        if (this.unitType === 'imperial') {
+            this.unitType = 'metric';
+            this.unitSymbol = '&#8451';
+        }
+        else {
+            this.unitType = 'imperial';
+            this.unitSymbol = '&#8457';
+        }
+        weather.update();
+    },
+    update: function() {
+        if (zipCode === true) {
+            weather.zip(lastZip);
+        }
+        else {
+            weather.geoLocation();
+        }
     }
 }
 
