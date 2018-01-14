@@ -1,21 +1,21 @@
 /*global $ APIKEY navigator*/
-
-//Variables
 var lat, lon;
-var zipCode = false; // zipCode causing bad request error
+var zipCode = false;
 var lastZip = '';
 var x = navigator.geolocation;
 
-// Get weather based on location
 $(document).ready(function() {
     if (x) {
         x.getCurrentPosition(function(position) {
             lat = position.coords.latitude;
             lon = position.coords.longitude;
             weather.geoLocation(lat, lon);
+            $('#unitSymbol').click(function() {
+                weather.changeUnit();
+            });
         });
     }
-    else { //alert to input zip
+    else {
         alert('input zip')
     }
 })
@@ -34,9 +34,10 @@ var weather = {
                 apiKey: APIKEY
             },
             success: function(response) {
-                $('#temp').html(Math.round(response.main.temp) + `${weather.unitSymbol} in ${response.name}`);
-                // getIcon();
-                // setTempColor();
+                console.log(response)
+                $('#localTemp').html(`${Math.round(response.main.temp)}`);
+                $('#unitSymbol').html(`${weather.unitSymbol}`);
+                $('#city').html(`${response.name}, ${response.sys.country}`);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert(textStatus, errorThrown)
@@ -56,9 +57,8 @@ var weather = {
                 console.log(response);
                 zipCode = true;
                 lastZip = zip;
-                $('#temp').html(Math.round(response.main.temp) + `${weather.unitSymbol} in ${response.name}`);
-                // getIcon();
-                // setTempColor();
+                $('#localTemp').html(`${Math.round(response.main.temp)}${weather.unitSymbol}`);
+                $('#city').html(`${response.name}, ${response.sys.country}`);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert(textStatus, errorThrown)
@@ -74,7 +74,7 @@ var weather = {
             this.unitType = 'imperial';
             this.unitSymbol = '&#8457';
         }
-        weather.update();
+        this.update();
     },
     update: function() {
         if (zipCode === true) {
@@ -86,8 +86,4 @@ var weather = {
     }
 }
 
-
-
-// getWeather by zip
-// temp conversion api call
 // icon generator

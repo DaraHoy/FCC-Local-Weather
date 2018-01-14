@@ -8,19 +8,24 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- CDN for materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link rel="stylesheet" href="style.css" type="text/css" />
-    <title>Local Weather</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <title>Weatherize</title>
 </head>
-<body id='tempColor' class=''>
-    <div class="container-fluid">
+<body>
+
+    <div id='weatherContainer' class="container-fluid blue z-depth-1">
         <div class="row">
-            <div id='tempContainer' class="col s12 blue darken-1 center-align valign-wrapper z-depth-1">
-                <h1><span id='temp' class='white-text thin'></span></h1>
-                <h1><span id='city' class='white-text'></span></h1>
+            <div class="col s12 center-align">
+                <h4><span id='city' class='thin white-text'></span></h4>
+            </div>
+            <div class="col s12 center-align">
+                <h1><span id='localTemp' class='thin white-text'></span><span id='unitSymbol' class='white-text'></span></h1>
+            </div>
+            <div class="col s12 center-align">
+                <img src="http://openweathermap.org/img/w/01d.png"></img>
             </div>
         </div>
-    </div><!-- main container ends -->
-
+    </div>
 
     <!-- CDN for jQuery + materialize.js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
