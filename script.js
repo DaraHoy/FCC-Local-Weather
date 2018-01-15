@@ -1,4 +1,9 @@
 /*global $ APIKEY navigator*/
+
+//NOTES
+// Currently No element available to update zipcode, use weather.zip(zip) example: weather.zip('02909') in console to try search method.
+// Current version still missing element to convert unit, click on the displayed temperature to switch.
+
 var lat, lon;
 var zipCode = false;
 var lastZip = '';
@@ -10,7 +15,7 @@ $(document).ready(function() {
             lat = position.coords.latitude;
             lon = position.coords.longitude;
             weather.geoLocation(lat, lon);
-            $('#unitSymbol').click(function() {
+            $('#convertUnit').click(function() {
                 weather.changeUnit();
             });
         });
@@ -88,7 +93,3 @@ var weather = {
         }
     }
 }
-
-$(".button-collapse").sideNav();
-
-// icon generator
