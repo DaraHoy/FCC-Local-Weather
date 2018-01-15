@@ -1,8 +1,9 @@
 /*global $ APIKEY navigator*/
 
-//NOTES
-// Currently No element available to update zipcode, use weather.zip(zip) example: weather.zip('02909') in console to try search method.
-// Current version still missing element to convert unit, click on the displayed temperature to switch.
+/*NOTES
+Currently No element available to update zipcode, use weather.zip(zip)
+example: weather.zip('02909') in console to try search method.
+using this method will update the weather icon to the zipcode*/
 
 var lat, lon;
 var zipCode = false;
@@ -15,7 +16,7 @@ $(document).ready(function() {
             lat = position.coords.latitude;
             lon = position.coords.longitude;
             weather.geoLocation(lat, lon);
-            $('#convertUnit').click(function() {
+            $('#convert').click(function() {
                 weather.changeUnit();
             });
         });
@@ -26,7 +27,7 @@ $(document).ready(function() {
 })
 
 var weather = {
-    unitType: 'imperial',
+    unitType: 'imperial', //unit set to 'imperial' by default
     unitSymbol: '&#8457',
     geoLocation: function() {
         $.ajax({
@@ -43,14 +44,14 @@ var weather = {
                 $('#city').html(`${response.name}, ${response.sys.country}`);
                 $('#localTemp').html(`${Math.round(response.main.temp)}`);
                 $('#unitSymbol').html(`${weather.unitSymbol}`);
-                $('#condition').html(`<img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png"></img><br><p>${response.weather[0].description.toUpperCase()}</p>`);
+                $('#condition').html(`<img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png"></img><br><p>${response.weather[0].main.toUpperCase()}</p>`);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert(textStatus, errorThrown)
             }
         })
     },
-    zip: function(zip) {
+    zip: function(zip) { //API call based on zip provided
         $.ajax({
             method: "GET",
             url: "https://api.openweathermap.org/data/2.5/weather",
@@ -66,14 +67,14 @@ var weather = {
                 $('#city').html(`${response.name}, ${response.sys.country}`);
                 $('#localTemp').html(`${Math.round(response.main.temp)}`);
                 $('#unitSymbol').html(`${weather.unitSymbol}`);
-                $('#condition').html(`<p>${response.weather[0].description.toUpperCase()}</p><img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png"></img>`);
+                $('#condition').html(`<p>${response.weather[0].main.toUpperCase()}</p><img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png"></img>`);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert(textStatus, errorThrown)
             }
         })
     },
-    changeUnit: function() {
+    changeUnit: function() { //Unit conversion
         if (this.unitType === 'imperial') {
             this.unitType = 'metric';
             this.unitSymbol = '&#8451';
