@@ -35,9 +35,10 @@ var weather = {
             },
             success: function(response) {
                 console.log(response)
+                $('#city').html(`${response.name}, ${response.sys.country}`);
                 $('#localTemp').html(`${Math.round(response.main.temp)}`);
                 $('#unitSymbol').html(`${weather.unitSymbol}`);
-                $('#city').html(`${response.name}, ${response.sys.country}`);
+                $('#condition').html(`<img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png"></img><br><p>${response.weather[0].description.toUpperCase()}</p>`);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert(textStatus, errorThrown)
@@ -57,8 +58,10 @@ var weather = {
                 console.log(response);
                 zipCode = true;
                 lastZip = zip;
-                $('#localTemp').html(`${Math.round(response.main.temp)}${weather.unitSymbol}`);
                 $('#city').html(`${response.name}, ${response.sys.country}`);
+                $('#localTemp').html(`${Math.round(response.main.temp)}`);
+                $('#unitSymbol').html(`${weather.unitSymbol}`);
+                $('#condition').html(`<p>${response.weather[0].description.toUpperCase()}</p><img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png"></img>`);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert(textStatus, errorThrown)
@@ -85,5 +88,7 @@ var weather = {
         }
     }
 }
+
+$(".button-collapse").sideNav();
 
 // icon generator
